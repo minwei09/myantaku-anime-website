@@ -52,7 +52,6 @@ const Detail = () => {
     getAnimeCharacters(id)
   },[id])
 
-  console.log(character)
   
   return (
     <div className=' mt-24 px-3'>
@@ -60,7 +59,7 @@ const Detail = () => {
       <div className='lg:flex justify-between gap-5 p-2'>
       <div className='mb-8 lg:w-[70%]'>
         <h1 className='text-white text-2xl font-semibold mb-4'>{anime?.title}</h1>
-        <iframe className='w-full h-[300px] sm:h-[350px] md:h-[470px] lg:w-full lg:h-[550px] lg:mx-auto  object-contain' src={anime?.trailer?.embed_url} frameborder="0"></iframe>
+        <iframe className='w-full h-[300px] sm:h-[350px] md:h-[470px] lg:w-full lg:h-[550px] lg:mx-auto  object-contain' src={anime?.trailer?.embed_url} ></iframe>
       </div>
     
       <div className='lg:w-[30%]'><h1 className='text-white font-semibold m-3 lg:mt-12'>Episode List:</h1>
@@ -68,7 +67,7 @@ const Detail = () => {
         {
           episode.map( item => {
             return(
-              <div className='text-white text-sm border rounded-lg flex items-center gap-9 p-3 mb-3 cursor-pointer hover:bg-slate-800 hover:scale-[1.02] transition-1'>
+              <div key={item?.mal_id} className='text-white text-sm border rounded-lg flex items-center gap-9 p-3 mb-3 cursor-pointer hover:bg-slate-800 hover:scale-[1.02] transition-1'>
                 <p>{item?.mal_id}</p>
                 <h1>{item?.title}</h1>
               </div>
@@ -145,12 +144,14 @@ const Detail = () => {
   <p className='p-1'>Status: {anime?.status}</p>
   <p className='p-1'>Aired: {anime?.aired?.string}</p>
   <p className='p-1'>Rating: {anime?.rating}</p>
-  <p className='flex p-1'>Studio: {anime?.studios?.map( item =>( <h1 className='mx-2'>{item?.name} ,</h1>) )}</p>
+  <p className='flex p-1'>Studio: {anime?.studios?.map( item =>( <div key={item?.name}><h1 className='mx-2'>{item?.name} ,</h1></div>) )}</p>
 
   <div className='p-1 flex items-center gap-5 mt-2'>
     {
       anime?.genres?.map(item => (
-        <h1 className='transition duration-150 border border-[#28226c] font-semibold text-xs  rounded-full py-2 px-4 cursor-pointer hover:text-[#292466] hover:bg-black hover:shadow-2xl hover:shadow-[white] md:py-3 md:px-5'>{item?.name}</h1>
+        <div key={item?.name}>
+          <h1  className='transition duration-150 border border-[#28226c] font-semibold text-xs  rounded-full py-2 px-4 cursor-pointer hover:text-[#292466] hover:bg-black hover:shadow-2xl hover:shadow-[white] md:py-3 md:px-5'>{item?.name}</h1>
+        </div>
       ))
     }
   </div>
@@ -194,7 +195,7 @@ const Detail = () => {
         {
           character.map( item => {
             return(
-              <SwiperSlide>             
+              <SwiperSlide key={item?.mal_id}>             
                 <div>
                 <div className='text-white h-[250px] w-full flex flex-col border border-white rounded-lg py-1'>
                   <h1 className='text-sm my-3'>{item?.character?.name}</h1>

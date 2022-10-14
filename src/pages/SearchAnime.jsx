@@ -127,8 +127,8 @@ const SearchAnime = () => {
           anime.map( item => {
             return(
               
-                <Link to={`/anime/${item?.mal_id}`}>
-                    <div className='mt-5 transition-1' key={item?.mal_id}>
+                <Link to={`/anime/${item?.mal_id}`} key={item?.mal_id}>
+                    <div className='mt-5 transition-1' >
                       <img className='h-[300px] object-contain w-full items-start' src={item?.images?.jpg?.large_image_url} alt="" loading='lazy'/>
                       <h1 className='text-sm font-semibold py-3 text-center'>{stringLimit(item?.title, 30)}</h1>
                     </div>
