@@ -40,10 +40,10 @@ const Header = () => {
       {/* - NAV-LINK CONTAINER */}
       <div className='flex items-center gap-5 sm:gap-8 lg:gap-11'>
         {
-          navLink.map( item => (
-            < >
+          navLink.map( (item,index) => (
+            <div key={index} >
             <Link className='transition-1 text-xs sm:text-sm text-white hover:scale-110 hover:text-slate-400' to={item.path}>{item.display}</Link>
-            </>
+            </div>
           ))
         }
       </div>

@@ -48,8 +48,8 @@ const HeroSlider = () => {
         {
             sliceAnime.map( item => {
                 return(
-                    <SwiperSlide>
-                    <div key={item?.mal_id} className="relative max-w-[90%] md:max-w-full">
+                    <SwiperSlide  key={item?.mal_id}>
+                    <div className="relative max-w-[90%] md:max-w-full">
                         <img src={item?.trailer?.images?.maximum_image_url} alt="" />
                     
                     <div className='bg-black opacity-40 absolute top-0 left-0 w-full min-h-full pointer-events-none'></div>

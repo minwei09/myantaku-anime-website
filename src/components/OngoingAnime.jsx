@@ -71,9 +71,9 @@ const OngoingAnime = () => {
         {
             anime.map( item => {
                 return(
-                    <SwiperSlide>
+                    <SwiperSlide key={item?.mal_id}>
                     <Link to={`/anime/${item?.mal_id}`}>
-                    <div className=' w-full h-[315px] transition-1 hover:scale-[.98] cursor-pointer transition-all ' key={item?.mal_id}>
+                    <div className=' w-full h-[315px] transition-1 hover:scale-[.98] cursor-pointer transition-all ' >
 
                         {/* - IMG CONTAINER */}
                         <div className='h-[250px]'>
