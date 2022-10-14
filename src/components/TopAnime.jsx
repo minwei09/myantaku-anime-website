@@ -76,7 +76,7 @@ const TopAnime = () => {
 
                         {/* - IMG CONTAINER */}
                         <div className='h-[250px]'>
-                        <img className='home_img' src={item?.images?.jpg?.large_image_url} alt={item?.title} loading='lazy'/>
+                        <img className='home_img' src={item?.images?.jpg?.large_image_url} alt={item?.title} />
                         </div>
 
                         {/* - RATING */}

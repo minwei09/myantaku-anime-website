@@ -52,7 +52,7 @@ const HeroSlider = () => {
                     <div className="relative max-w-[90%] md:max-w-full">
                         <img src={item?.trailer?.images?.maximum_image_url} alt="" />
                     
-                    <div className='bg-black opacity-40 absolute top-0 left-0 w-full min-h-full pointer-events-none'></div>
+                    <div className='bg-black opacity-20 md:opacity-40 absolute top-0 left-0 w-full min-h-full pointer-events-none'></div>
 
                     {/* - CONTAINER */}
                     <div className="z-10 md:absolute top-0 left-0 w-full min-h-full md:flex items-center text-left">
