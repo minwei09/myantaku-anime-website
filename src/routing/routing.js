@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 import Home from '../pages/Home'
 import Detail from '../pages/Detail'
@@ -11,13 +11,16 @@ import Manga from '../pages/Manga'
 const routing = () => {
   return (
     <div >
+      
       <Header />
 
-      <Routes>       
+      <Routes> 
+            
         <Route path='/' element={<Home />}/>
         <Route path='/anime/:id' element={<Detail />}/>
         <Route path='/search/anime/:id' element={<SearchAnime />}/>
         <Route path='/manga' element={<Manga />}/>
+        <Route path='*' element={<Navigate to='/'/>}/>
       </Routes>
 
       <Footer />

@@ -11,37 +11,39 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination } from "swiper";
+import { useGetOngoingAnimeQuery } from '../redux-toolkit/api/getAnimeApi';
 
 const OngoingAnime = () => {
 
-    const [anime, setAnime] = useState([])
-
     const stringLimit = (string, num) => {
         return string.length > num ? string.substring(0, num -1 ) + '...' : string
-        
     }
 
-    const getAnime = async() => {
-        const check = localStorage.getItem('ongoingAnime')
+    const {data, isLoading, isSuccess, error} = useGetOngoingAnimeQuery()
 
-        if(check) {
-            setAnime(JSON.parse(check))
-        }
-        else {
-            const res = await instance.get(requests.getOngoingAnime)
-            const data = res.data.data
-            localStorage.setItem('ongoingAnime', JSON.stringify(data))
-            setAnime(data)
-        }
-    }
+    // const [anime, setAnime] = useState([])
 
-    useEffect( () => {
-        getAnime()
-    },[])
+    // const getAnime = async() => {
+    //     const check = localStorage.getItem('ongoingAnime')
+
+    //     if(check) {
+    //         setAnime(JSON.parse(check))
+    //     }
+    //     else {
+    //         const res = await instance.get(requests.getOngoingAnime)
+    //         const data = res.data.data
+    //         // localStorage.setItem('ongoingAnime', JSON.stringify(data))
+    //         setAnime(data)
+    //     }
+    // }
+
+    // useEffect( () => {
+    //     getAnime()
+    // },[])
 
 
   return (
-    <div className='top_section mx-2'>
+    <div className='top_section mx-2 '>
         <h1 className='home-title mb-5'>Ongoing Anime</h1>
         <Swiper
         slidesPerView={2}
@@ -68,8 +70,11 @@ const OngoingAnime = () => {
               spaceBetween: 30,
             }}}
         >
+        {isLoading && <h1 className='text-4xl mt-28 text-center text-white'>Loading...</h1>}
+        {error && <h1 className='text-4xl mt-28 text-center text-white'>error :'(</h1>}
         {
-            anime.map( item => {
+            isSuccess &&
+            data.data?.map( item => {
                 return(
                     <SwiperSlide key={item?.mal_id}>
                     <Link to={`/anime/${item?.mal_id}`}>

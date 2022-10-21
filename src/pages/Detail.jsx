@@ -146,11 +146,11 @@ const Detail = () => {
   <p className='p-1'>Rating: {anime?.rating}</p>
   <p className='flex p-1'>Studio: {anime?.studios?.map( item =>( <div key={item?.name}><h1 className='mx-2'>{item?.name} ,</h1></div>) )}</p>
 
-  <div className='p-1 flex items-center gap-5 mt-2'>
+  <div className='flex flex-wrap p-1  items-center gap-5 mt-2'>
     {
       anime?.genres?.map(item => (
         <div key={item?.name}>
-          <h1  className='transition duration-150 border border-[#28226c] font-semibold text-xs  rounded-full py-2 px-4 cursor-pointer hover:text-[#292466] hover:bg-black hover:shadow-2xl hover:shadow-[white] md:py-3 md:px-5'>{item?.name}</h1>
+          <h1  className='w-fit transition duration-150 border border-[#28226c] font-semibold text-xs  rounded-full py-2 px-4 cursor-pointer hover:text-[#292466] hover:bg-black hover:shadow-2xl hover:shadow-[white] md:py-3 md:px-5'>{item?.name}</h1>
         </div>
       ))
     }

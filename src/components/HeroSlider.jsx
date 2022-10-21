@@ -12,31 +12,37 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination, Autoplay } from "swiper";
+import { useGetTopAiringAnimeQuery } from '../redux-toolkit/api/getAnimeApi';
 
 const HeroSlider = () => {
 
-    const [heroAnime, setHeroAnime ] = useState([])
-
     const stringLimit = (string, num) => {
         return string.length > num ? string.substring(0, num -1 ) + '...' : string
-        
     }
+    
+    const [heroAnime, setHeroAnime ] = useState([])
 
-    const getHeroAnime = async() => {
+    // const getHeroAnime = async() => {
 
-        const res = await instance.get(requests.getTopAiringAnime)
-        const data = res.data.data
-        setHeroAnime(data)
-    }
+    //     const res = await instance.get(requests.getTopAiringAnime)
+    //     const data = res.data.data
+    //     setHeroAnime(data)
+    // }
 
-    useEffect( () => {
-        getHeroAnime()
-    }, [])
+    // useEffect( () => {
+    //     getHeroAnime()
+    // }, [])
 
-    const sliceAnime = heroAnime.slice(0, 7)
+    
+
+    const { data, isLoading, isFetching, isSuccess, error} = useGetTopAiringAnimeQuery()
+    // console.log(data)
+    // setHeroAnime({data}.data)
+
+    // const sliceAnime = heroAnime.slice(0, 7)
 
   return (
-    <div className=''>
+    <div className='text-white'>
 
         <Swiper
         autoplay={{delay: 3000}}
@@ -45,8 +51,13 @@ const HeroSlider = () => {
           }}
           modules={[Pagination, Autoplay]}
           className="mySwiper">
-        {
-            sliceAnime.map( item => {
+
+        {/* {isFetching && <h1 className='text-5xl mt-28 text-center'>Fetching...</h1>} */}
+        {isLoading && <h1 className='text-4xl mt-28 text-center'>Loading...</h1>}
+        {error && <h1 className='text-4xl mt-28 text-center'>error :'(</h1>}
+        {           
+            isSuccess &&
+            data.data.slice(0, 7)?.map( item => {
                 return(
                     <SwiperSlide  key={item?.mal_id}>
                     <div className="relative max-w-[90%] md:max-w-full">

@@ -11,33 +11,36 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination } from "swiper";
+import { useGetUpcomingAnimeQuery } from '../redux-toolkit/api/getAnimeApi';
 
 const UpcomingAnime = () => {
 
-    const [anime, setAnime] = useState([])
+   const {data, isLoading, isSuccess, error} = useGetUpcomingAnimeQuery()
 
     const stringLimit = (string, num) => {
         return string.length > num ? string.substring(0, num -1 ) + '...' : string
         
-    }
+    } 
+    
+    // const [anime, setAnime] = useState([])
 
-    const getAnime = async() => {
-        const check = localStorage.getItem('upcomingAnime')
+    // const getAnime = async() => {
+    //     const check = localStorage.getItem('upcomingAnime')
 
-        if(check) {
-            setAnime(JSON.parse(check))
-        }
-        else {
-            const res = await instance.get(requests.getUpcomingAnime)
-            const data = res.data.data
-            localStorage.setItem('upcomingAnime', JSON.stringify(data))
-            setAnime(data)
-        }
-    }
+    //     if(check) {
+    //         setAnime(JSON.parse(check))
+    //     }
+    //     else {
+    //         const res = await instance.get(requests.getUpcomingAnime)
+    //         const data = res.data.data
+    //         // localStorage.setItem('upcomingAnime', JSON.stringify(data))
+    //         setAnime(data)
+    //     }
+    // }
 
-    useEffect( () => {
-        getAnime()
-    },[])
+    // useEffect( () => {
+    //     getAnime()
+    // },[])
 
 
   return (
@@ -69,8 +72,11 @@ const UpcomingAnime = () => {
               spaceBetween: 30,
             }}}
         >
+        {isLoading && <h1 className='text-4xl mt-28 text-center text-white'>Loading...</h1>}
+        {error && <h1 className='text-4xl mt-28 text-center text-white'>error :'(</h1>}
         {
-            anime.map( item => {
+            isSuccess &&
+            data.data?.map( item => {
                 return(
                     <SwiperSlide key={item?.mal_id}>
                     <Link to={`/anime/${item?.mal_id}`}>
