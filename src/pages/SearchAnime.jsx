@@ -330,17 +330,42 @@ const SearchAnime = () => {
       <h1>{pageNumber}</h1>
 
       {
-       (title?.pagination.has_next_page &&
-       selectedGenre?.pagination.has_next_page &&
-       type?.pagination.has_next_page) ?
-       <button className='pageButton' onClick={() => dispatch(increasePage()) && setButtonClick(!buttonClick)}>Next</button> :
-       <button className='pageButton pointer-events-none opacity-30'>Next</button>
-       }
+        showSearchAnime &&
+        <>
+        {
+          title?.pagination.has_next_page ?
+          <button className='pageButton' onClick={() => dispatch(increasePage()) && setButtonClick(!buttonClick)}>Next</button> :
+          <button className='pageButton pointer-events-none opacity-30'>Next</button>
+        }
+        </>
+      }
+
+      {
+        showGenresAnime &&
+        <>
+        {
+          selectedGenre?.pagination.has_next_page ?
+          <button className='pageButton' onClick={() => dispatch(increasePage()) && setButtonClick(!buttonClick)}>Next</button> :
+          <button className='pageButton pointer-events-none opacity-30'>Next</button>
+        }
+        </>
+      }
+
+      {
+        showTypeAnime &&
+        <>
+        {
+          type?.pagination.has_next_page ?
+          <button className='pageButton' onClick={() => dispatch(increasePage()) && setButtonClick(!buttonClick)}>Next</button> :
+          <button className='pageButton pointer-events-none opacity-30'>Next</button>
+        }
+        </>
+      }
+
       
     </div>
 
   </div>
   )
 }
-
 export default SearchAnime
